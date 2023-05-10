@@ -1,0 +1,104 @@
+openapi: 3.0.3
+info:
+  title: NILE API定義
+  description: |-
+    NILEサーバーのAPI定義
+  contact: 
+    email: example@example.com
+  version: 1.0.0
+servers:
+  - url: https://localhost:8080
+tags:
+  - name: users
+    description: ユーザー関連API
+paths:
+  /users:
+    get:
+      tags:
+        - users
+      summary: ユーザー一覧取得
+      description: 登録されているユーザーの一覧を取得する
+      operationId: findAllUsers
+      responses:
+        "200":
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/User"
+        "400":
+          description: Invalid request
+
+  /users/{userId}:
+    put:
+      tags:
+        - users
+      summary: ユーザー更新
+      description: 指定したユーザーの情報を更新する
+      operationId: updateUser
+      parameters:
+        - name: userId
+          in: path
+          description: ユーザーID
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateUserRequest"
+        required: true
+      responses:
+        "200":
+          description: Successful operation
+        "400":
+          description: Invalid request
+        "404":
+          description: User not found
+    get:
+      tags:
+        - users
+      summary: ユーザー取得
+      description: 指定したユーザーの情報を取得する
+      operationId: findUser
+      parameters:
+        - name: userId
+          in: path
+          description: ユーザーID
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/User"
+        "400":
+          description: Invalid request
+components:
+  schemas:
+  ########### モデル ###########
+    User:
+      type: object
+      required:
+        - id
+        - name
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+
+  ########### リクエスト ###########
+    UpdateUserRequest:
+      type: object
+      required:
+        - name
+      properties:
+        name:
+          type: string
