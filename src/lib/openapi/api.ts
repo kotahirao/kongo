@@ -36,6 +36,19 @@ import { BASE_PATH, COLLECTION_FORMATS, BaseAPI, RequiredError } from './base';
 /**
  *
  * @export
+ * @interface FindAllUsersResponse
+ */
+export interface FindAllUsersResponse {
+	/**
+	 *
+	 * @type {Array<User>}
+	 * @memberof FindAllUsersResponse
+	 */
+	users: Array<User>;
+}
+/**
+ *
+ * @export
  * @interface UpdateUserRequest
  */
 export interface UpdateUserRequest {
@@ -212,7 +225,7 @@ export const UsersApiFp = function (configuration?: Configuration) {
 		 */
 		async findAllUsers(
 			options?: AxiosRequestConfig
-		): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<User>>> {
+		): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FindAllUsersResponse>> {
 			const localVarAxiosArgs = await localVarAxiosParamCreator.findAllUsers(options);
 			return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
 		},
@@ -270,7 +283,7 @@ export const UsersApiFactory = function (
 		 * @param {*} [options] Override http request option.
 		 * @throws {RequiredError}
 		 */
-		findAllUsers(options?: any): AxiosPromise<Array<User>> {
+		findAllUsers(options?: any): AxiosPromise<FindAllUsersResponse> {
 			return localVarFp.findAllUsers(options).then((request) => request(axios, basePath));
 		},
 		/**

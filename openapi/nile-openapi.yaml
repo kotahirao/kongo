@@ -25,9 +25,7 @@ paths:
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/User'
+                $ref: '#/components/schemas/FindAllUsersResponse'
         '400':
           description: Invalid request
 
@@ -102,3 +100,14 @@ components:
       properties:
         name:
           type: string
+
+    ########### レスポンス ###########
+    FindAllUsersResponse:
+      type: object
+      required:
+        - users
+      properties:
+        users:
+          type: array
+          items:
+            $ref: '#/components/schemas/User'
