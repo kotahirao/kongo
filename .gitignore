@@ -12,3 +12,4 @@ vite.config.ts.timestamp-*
 # openapi generator
 src/lib/openapi/*
 !src/lib/openapi/api.ts
+!src/lib/openapi/configration.ts
