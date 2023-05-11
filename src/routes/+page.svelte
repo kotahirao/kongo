@@ -1,3 +1,3 @@
 <script lang="ts">
-    document.location = "/users";
+	document.location = '/users';
 </script>

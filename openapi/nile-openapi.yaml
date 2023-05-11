@@ -3,7 +3,7 @@ info:
   title: NILE API定義
   description: |-
     NILEサーバーのAPI定義
-  contact: 
+  contact:
     email: example@example.com
   version: 1.0.0
 servers:
@@ -20,15 +20,15 @@ paths:
       description: 登録されているユーザーの一覧を取得する
       operationId: findAllUsers
       responses:
-        "200":
+        '200':
           description: successful operation
           content:
             application/json:
               schema:
                 type: array
                 items:
-                  $ref: "#/components/schemas/User"
-        "400":
+                  $ref: '#/components/schemas/User'
+        '400':
           description: Invalid request
 
   /users/{userId}:
@@ -49,14 +49,14 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/UpdateUserRequest"
+              $ref: '#/components/schemas/UpdateUserRequest'
         required: true
       responses:
-        "200":
+        '200':
           description: Successful operation
-        "400":
+        '400':
           description: Invalid request
-        "404":
+        '404':
           description: User not found
     get:
       tags:
@@ -72,17 +72,17 @@ paths:
           schema:
             type: string
       responses:
-        "200":
+        '200':
           description: successful operation
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/User"
-        "400":
+                $ref: '#/components/schemas/User'
+        '400':
           description: Invalid request
 components:
   schemas:
-  ########### モデル ###########
+    ########### モデル ###########
     User:
       type: object
       required:
@@ -94,7 +94,7 @@ components:
         name:
           type: string
 
-  ########### リクエスト ###########
+    ########### リクエスト ###########
     UpdateUserRequest:
       type: object
       required:
