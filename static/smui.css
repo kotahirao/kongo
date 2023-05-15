@@ -1228,6 +1228,8 @@ svg.mdc-button__icon {
 	border-bottom-left-radius: 0;
 }
 .smui-button__group.smui-button__group--raised {
+	border-radius: 4px;
+	border-radius: var(--mdc-shape-small, 4px);
 	box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14),
 		0px 1px 5px 0px rgba(0, 0, 0, 0.12);
 }
@@ -8887,6 +8889,11 @@ a.mdc-list-item {
 	padding: 0 24px 9px;
 	z-index: 1;
 }
+@media screen and (forced-colors: active) {
+	.mdc-dialog--fullscreen .mdc-dialog__header {
+		border-bottom-color: CanvasText;
+	}
+}
 .mdc-dialog--fullscreen .mdc-dialog__header .mdc-dialog__close {
 	right: -12px;
 }
@@ -8905,12 +8912,16 @@ a.mdc-list-item {
 .mdc-dialog--fullscreen.mdc-dialog--scrollable .mdc-dialog__actions {
 	border-top: 1px solid rgba(0, 0, 0, 0);
 }
+@media screen and (forced-colors: active) {
+	.mdc-dialog--fullscreen.mdc-dialog--scrollable .mdc-dialog__actions {
+		border-top-color: CanvasText;
+	}
+}
 .mdc-dialog__content {
 	flex-grow: 1;
 	box-sizing: border-box;
 	margin: 0;
 	overflow: auto;
-	-webkit-overflow-scrolling: touch;
 }
 .mdc-dialog__content > :first-child {
 	margin-top: 0;
@@ -8944,6 +8955,11 @@ a.mdc-list-item {
 	margin: 0;
 	padding: 8px;
 	border-top: 1px solid rgba(0, 0, 0, 0);
+}
+@media screen and (forced-colors: active) {
+	.mdc-dialog__actions {
+		border-top-color: CanvasText;
+	}
 }
 .mdc-dialog--stacked .mdc-dialog__actions {
 	flex-direction: column;
@@ -9025,6 +9041,15 @@ a.mdc-list-item {
 }
 .mdc-dialog-scroll-lock {
 	overflow: hidden;
+}
+.mdc-dialog--no-content-padding .mdc-dialog__content {
+	padding: 0;
+}
+.mdc-dialog--sheet .mdc-dialog__close {
+	right: 12px;
+	top: 9px;
+	position: absolute;
+	z-index: 1;
 }
 .mdc-dialog.smui-dialog--selection .mdc-dialog__content {
 	padding: 0;

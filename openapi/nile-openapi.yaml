@@ -13,6 +13,23 @@ tags:
     description: ユーザー関連API
 paths:
   /users:
+    post:
+      tags:
+        - users
+      summary: ユーザー登録
+      description: ユーザーを新規登録する
+      operationId: createUsers
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateUsersRequest'
+        required: true
+      responses:
+        '200':
+          description: successful operation
+        '400':
+          description: Invalid request
     get:
       tags:
         - users
@@ -48,7 +65,6 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/UpdateUserRequest'
-        required: true
       responses:
         '200':
           description: Successful operation
@@ -78,6 +94,7 @@ paths:
                 $ref: '#/components/schemas/User'
         '400':
           description: Invalid request
+
 components:
   schemas:
     ########### モデル ###########
@@ -92,7 +109,24 @@ components:
         name:
           type: string
 
+    CreateUserParams:
+      type: object
+      required:
+        - name
+      properties:
+        name:
+          type: string
+
     ########### リクエスト ###########
+    CreateUsersRequest:
+      type: object
+      required:
+        - users
+      properties:
+        users:
+          type: array
+          items:
+            $ref: '#/components/schemas/CreateUserParams'
     UpdateUserRequest:
       type: object
       required:

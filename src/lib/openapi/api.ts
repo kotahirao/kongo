@@ -36,6 +36,32 @@ import { BASE_PATH, COLLECTION_FORMATS, BaseAPI, RequiredError } from './base';
 /**
  *
  * @export
+ * @interface CreateUserParams
+ */
+export interface CreateUserParams {
+	/**
+	 *
+	 * @type {string}
+	 * @memberof CreateUserParams
+	 */
+	name: string;
+}
+/**
+ *
+ * @export
+ * @interface CreateUsersRequest
+ */
+export interface CreateUsersRequest {
+	/**
+	 *
+	 * @type {Array<CreateUserParams>}
+	 * @memberof CreateUsersRequest
+	 */
+	users: Array<CreateUserParams>;
+}
+/**
+ *
+ * @export
  * @interface FindAllUsersResponse
  */
 export interface FindAllUsersResponse {
@@ -85,6 +111,51 @@ export interface User {
  */
 export const UsersApiAxiosParamCreator = function (configuration?: Configuration) {
 	return {
+		/**
+		 * ユーザーを新規登録する
+		 * @summary ユーザー登録
+		 * @param {CreateUsersRequest} createUsersRequest
+		 * @param {*} [options] Override http request option.
+		 * @throws {RequiredError}
+		 */
+		createUsers: async (
+			createUsersRequest: CreateUsersRequest,
+			options: AxiosRequestConfig = {}
+		): Promise<RequestArgs> => {
+			// verify required parameter 'createUsersRequest' is not null or undefined
+			assertParamExists('createUsers', 'createUsersRequest', createUsersRequest);
+			const localVarPath = `/users`;
+			// use dummy base URL string because the URL constructor only accepts absolute URLs.
+			const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+			let baseOptions;
+			if (configuration) {
+				baseOptions = configuration.baseOptions;
+			}
+
+			const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options };
+			const localVarHeaderParameter = {} as any;
+			const localVarQueryParameter = {} as any;
+
+			localVarHeaderParameter['Content-Type'] = 'application/json';
+
+			setSearchParams(localVarUrlObj, localVarQueryParameter);
+			let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+			localVarRequestOptions.headers = {
+				...localVarHeaderParameter,
+				...headersFromBaseOptions,
+				...options.headers
+			};
+			localVarRequestOptions.data = serializeDataIfNeeded(
+				createUsersRequest,
+				localVarRequestOptions,
+				configuration
+			);
+
+			return {
+				url: toPathString(localVarUrlObj),
+				options: localVarRequestOptions
+			};
+		},
 		/**
 		 * 登録されているユーザーの一覧を取得する
 		 * @summary ユーザー一覧取得
@@ -159,19 +230,17 @@ export const UsersApiAxiosParamCreator = function (configuration?: Configuration
 		 * 指定したユーザーの情報を更新する
 		 * @summary ユーザー更新
 		 * @param {string} userId ユーザーID
-		 * @param {UpdateUserRequest} updateUserRequest
+		 * @param {UpdateUserRequest} [updateUserRequest]
 		 * @param {*} [options] Override http request option.
 		 * @throws {RequiredError}
 		 */
 		updateUser: async (
 			userId: string,
-			updateUserRequest: UpdateUserRequest,
+			updateUserRequest?: UpdateUserRequest,
 			options: AxiosRequestConfig = {}
 		): Promise<RequestArgs> => {
 			// verify required parameter 'userId' is not null or undefined
 			assertParamExists('updateUser', 'userId', userId);
-			// verify required parameter 'updateUserRequest' is not null or undefined
-			assertParamExists('updateUser', 'updateUserRequest', updateUserRequest);
 			const localVarPath = `/users/{userId}`.replace(
 				`{${'userId'}}`,
 				encodeURIComponent(String(userId))
@@ -218,6 +287,23 @@ export const UsersApiFp = function (configuration?: Configuration) {
 	const localVarAxiosParamCreator = UsersApiAxiosParamCreator(configuration);
 	return {
 		/**
+		 * ユーザーを新規登録する
+		 * @summary ユーザー登録
+		 * @param {CreateUsersRequest} createUsersRequest
+		 * @param {*} [options] Override http request option.
+		 * @throws {RequiredError}
+		 */
+		async createUsers(
+			createUsersRequest: CreateUsersRequest,
+			options?: AxiosRequestConfig
+		): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+			const localVarAxiosArgs = await localVarAxiosParamCreator.createUsers(
+				createUsersRequest,
+				options
+			);
+			return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+		},
+		/**
 		 * 登録されているユーザーの一覧を取得する
 		 * @summary ユーザー一覧取得
 		 * @param {*} [options] Override http request option.
@@ -247,13 +333,13 @@ export const UsersApiFp = function (configuration?: Configuration) {
 		 * 指定したユーザーの情報を更新する
 		 * @summary ユーザー更新
 		 * @param {string} userId ユーザーID
-		 * @param {UpdateUserRequest} updateUserRequest
+		 * @param {UpdateUserRequest} [updateUserRequest]
 		 * @param {*} [options] Override http request option.
 		 * @throws {RequiredError}
 		 */
 		async updateUser(
 			userId: string,
-			updateUserRequest: UpdateUserRequest,
+			updateUserRequest?: UpdateUserRequest,
 			options?: AxiosRequestConfig
 		): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
 			const localVarAxiosArgs = await localVarAxiosParamCreator.updateUser(
@@ -278,6 +364,18 @@ export const UsersApiFactory = function (
 	const localVarFp = UsersApiFp(configuration);
 	return {
 		/**
+		 * ユーザーを新規登録する
+		 * @summary ユーザー登録
+		 * @param {CreateUsersRequest} createUsersRequest
+		 * @param {*} [options] Override http request option.
+		 * @throws {RequiredError}
+		 */
+		createUsers(createUsersRequest: CreateUsersRequest, options?: any): AxiosPromise<void> {
+			return localVarFp
+				.createUsers(createUsersRequest, options)
+				.then((request) => request(axios, basePath));
+		},
+		/**
 		 * 登録されているユーザーの一覧を取得する
 		 * @summary ユーザー一覧取得
 		 * @param {*} [options] Override http request option.
@@ -300,13 +398,13 @@ export const UsersApiFactory = function (
 		 * 指定したユーザーの情報を更新する
 		 * @summary ユーザー更新
 		 * @param {string} userId ユーザーID
-		 * @param {UpdateUserRequest} updateUserRequest
+		 * @param {UpdateUserRequest} [updateUserRequest]
 		 * @param {*} [options] Override http request option.
 		 * @throws {RequiredError}
 		 */
 		updateUser(
 			userId: string,
-			updateUserRequest: UpdateUserRequest,
+			updateUserRequest?: UpdateUserRequest,
 			options?: any
 		): AxiosPromise<void> {
 			return localVarFp
@@ -323,6 +421,20 @@ export const UsersApiFactory = function (
  * @extends {BaseAPI}
  */
 export class UsersApi extends BaseAPI {
+	/**
+	 * ユーザーを新規登録する
+	 * @summary ユーザー登録
+	 * @param {CreateUsersRequest} createUsersRequest
+	 * @param {*} [options] Override http request option.
+	 * @throws {RequiredError}
+	 * @memberof UsersApi
+	 */
+	public createUsers(createUsersRequest: CreateUsersRequest, options?: AxiosRequestConfig) {
+		return UsersApiFp(this.configuration)
+			.createUsers(createUsersRequest, options)
+			.then((request) => request(this.axios, this.basePath));
+	}
+
 	/**
 	 * 登録されているユーザーの一覧を取得する
 	 * @summary ユーザー一覧取得
@@ -354,14 +466,14 @@ export class UsersApi extends BaseAPI {
 	 * 指定したユーザーの情報を更新する
 	 * @summary ユーザー更新
 	 * @param {string} userId ユーザーID
-	 * @param {UpdateUserRequest} updateUserRequest
+	 * @param {UpdateUserRequest} [updateUserRequest]
 	 * @param {*} [options] Override http request option.
 	 * @throws {RequiredError}
 	 * @memberof UsersApi
 	 */
 	public updateUser(
 		userId: string,
-		updateUserRequest: UpdateUserRequest,
+		updateUserRequest?: UpdateUserRequest,
 		options?: AxiosRequestConfig
 	) {
 		return UsersApiFp(this.configuration)

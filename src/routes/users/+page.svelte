@@ -1,18 +1,12 @@
 <script lang="ts">
-	import Test from '$lib/components/Test.svelte';
+	import CreateNewUserDialog from '$lib/components/CreateNewUserDialog.svelte';
 	import type { User } from '$lib/openapi';
 	import type { PageData } from './$types';
 	import DataTable, { Head, Body, Row, Cell } from '@smui/data-table';
 
-	let clicked = 0;
 	export let data: PageData;
 	const users: User[] = data.users;
-	console.log(users);
 </script>
-
-<pre>クリック回数： {clicked}</pre>
-
-<Test />
 
 <DataTable table$aria-label="Todo list" style="width: 100%;">
 	<Head>
@@ -30,3 +24,14 @@
 		{/each}
 	</Body>
 </DataTable>
+
+<div id="createNewUserDialog">
+	<CreateNewUserDialog />
+</div>
+
+<style>
+	#createNewUserDialog {
+		margin: 10px 0;
+		float: right;
+	}
+</style>
