@@ -1,18 +1,28 @@
 <script lang="ts">
-	import ApiFactory from '$lib/ApiFactory';
+	import type { UsersApi } from '$lib/openapi';
 	import Button, { Label } from '@smui/button';
 	import Dialog, { Title, Content, Actions } from '@smui/dialog';
 	import Textfield from '@smui/textfield';
+	import { createEventDispatcher } from 'svelte';
+
+	export let usersApi: UsersApi;
+
+	const dispatch = createEventDispatcher();
 
 	let open = false;
 	let newUserName = '';
 
-	const usersApi = ApiFactory.getusersApi();
-	function createNewUser() {
-    usersApi.createUsers({
-      users: [{name: newUserName}]
-    });
-  }
+	async function createNewUser() {
+		await usersApi.createUsers({
+			users: [{ name: newUserName }]
+		});
+		initInputs();
+		dispatch('userCreated');
+	}
+	function initInputs() {
+		newUserName = '';
+		open = false;
+	}
 </script>
 
 <Button on:click={() => (open = true)} variant="raised">
@@ -33,10 +43,13 @@
 		<Button on:click={() => (open = false)} color="secondary" variant="outlined">
 			<Label>キャンセル</Label>
 		</Button>
-		<Button style="margin-left: auto" on:click={() => {
-      createNewUser();
-      open = false;
-    }} variant="raised">
+		<Button
+			style="margin-left: auto"
+			on:click={() => {
+				createNewUser();
+			}}
+			variant="raised"
+		>
 			<Label>新規登録</Label>
 		</Button>
 	</Actions>
