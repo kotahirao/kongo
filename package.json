@@ -14,7 +14,9 @@
 		"format": "prettier --plugin-search-dir . --write .",
 		"prepare": "npm run smui-theme",
 		"smui-theme": "smui-theme compile static/smui.css -i src/theme",
-		"generate-openapi-schemas": "openapi-generator-cli generate -g typescript-axios -i ./openapi/nile-openapi.yaml -o ./src/lib/openapi"
+		"generate-schemas": "openapi-generator-cli generate -g typescript-axios -i ./openapi/nile-openapi.yaml -o ./src/lib/openapi",
+		"update-nile": "cp ../nile/openapi/nile-openapi.yaml ./openapi/nile-openapi.yaml",
+		"update-openapi": "yarn update-nile && yarn generate-schemas && yarn format"
 	},
 	"devDependencies": {
 		"@openapitools/openapi-generator-cli": "^2.6.0",

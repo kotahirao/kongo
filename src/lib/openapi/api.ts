@@ -157,6 +157,44 @@ export const UsersApiAxiosParamCreator = function (configuration?: Configuration
 			};
 		},
 		/**
+		 * 指定したユーザーの情報を削除する
+		 * @summary ユーザー削除
+		 * @param {string} userId ユーザーID
+		 * @param {*} [options] Override http request option.
+		 * @throws {RequiredError}
+		 */
+		deleteUser: async (userId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+			// verify required parameter 'userId' is not null or undefined
+			assertParamExists('deleteUser', 'userId', userId);
+			const localVarPath = `/users/{userId}`.replace(
+				`{${'userId'}}`,
+				encodeURIComponent(String(userId))
+			);
+			// use dummy base URL string because the URL constructor only accepts absolute URLs.
+			const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+			let baseOptions;
+			if (configuration) {
+				baseOptions = configuration.baseOptions;
+			}
+
+			const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options };
+			const localVarHeaderParameter = {} as any;
+			const localVarQueryParameter = {} as any;
+
+			setSearchParams(localVarUrlObj, localVarQueryParameter);
+			let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+			localVarRequestOptions.headers = {
+				...localVarHeaderParameter,
+				...headersFromBaseOptions,
+				...options.headers
+			};
+
+			return {
+				url: toPathString(localVarUrlObj),
+				options: localVarRequestOptions
+			};
+		},
+		/**
 		 * 登録されているユーザーの一覧を取得する
 		 * @summary ユーザー一覧取得
 		 * @param {*} [options] Override http request option.
@@ -304,6 +342,20 @@ export const UsersApiFp = function (configuration?: Configuration) {
 			return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
 		},
 		/**
+		 * 指定したユーザーの情報を削除する
+		 * @summary ユーザー削除
+		 * @param {string} userId ユーザーID
+		 * @param {*} [options] Override http request option.
+		 * @throws {RequiredError}
+		 */
+		async deleteUser(
+			userId: string,
+			options?: AxiosRequestConfig
+		): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<User>> {
+			const localVarAxiosArgs = await localVarAxiosParamCreator.deleteUser(userId, options);
+			return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+		},
+		/**
 		 * 登録されているユーザーの一覧を取得する
 		 * @summary ユーザー一覧取得
 		 * @param {*} [options] Override http request option.
@@ -376,6 +428,16 @@ export const UsersApiFactory = function (
 				.then((request) => request(axios, basePath));
 		},
 		/**
+		 * 指定したユーザーの情報を削除する
+		 * @summary ユーザー削除
+		 * @param {string} userId ユーザーID
+		 * @param {*} [options] Override http request option.
+		 * @throws {RequiredError}
+		 */
+		deleteUser(userId: string, options?: any): AxiosPromise<User> {
+			return localVarFp.deleteUser(userId, options).then((request) => request(axios, basePath));
+		},
+		/**
 		 * 登録されているユーザーの一覧を取得する
 		 * @summary ユーザー一覧取得
 		 * @param {*} [options] Override http request option.
@@ -432,6 +494,20 @@ export class UsersApi extends BaseAPI {
 	public createUsers(createUsersRequest: CreateUsersRequest, options?: AxiosRequestConfig) {
 		return UsersApiFp(this.configuration)
 			.createUsers(createUsersRequest, options)
+			.then((request) => request(this.axios, this.basePath));
+	}
+
+	/**
+	 * 指定したユーザーの情報を削除する
+	 * @summary ユーザー削除
+	 * @param {string} userId ユーザーID
+	 * @param {*} [options] Override http request option.
+	 * @throws {RequiredError}
+	 * @memberof UsersApi
+	 */
+	public deleteUser(userId: string, options?: AxiosRequestConfig) {
+		return UsersApiFp(this.configuration)
+			.deleteUser(userId, options)
 			.then((request) => request(this.axios, this.basePath));
 	}
 

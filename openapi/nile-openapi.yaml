@@ -47,6 +47,30 @@ paths:
           description: Invalid request
 
   /users/{userId}:
+    get:
+      tags:
+        - users
+      summary: ユーザー取得
+      description: 指定したユーザーの情報を取得する
+      operationId: findUser
+      parameters:
+        - name: userId
+          in: path
+          description: ユーザーID
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '400':
+          description: Invalid request
+        '404':
+          description: User not found
     put:
       tags:
         - users
@@ -72,12 +96,12 @@ paths:
           description: Invalid request
         '404':
           description: User not found
-    get:
+    delete:
       tags:
         - users
-      summary: ユーザー取得
-      description: 指定したユーザーの情報を取得する
-      operationId: findUser
+      summary: ユーザー削除
+      description: 指定したユーザーの情報を削除する
+      operationId: deleteUser
       parameters:
         - name: userId
           in: path
@@ -94,6 +118,8 @@ paths:
                 $ref: '#/components/schemas/User'
         '400':
           description: Invalid request
+        '404':
+          description: User not found
 
 components:
   schemas:
