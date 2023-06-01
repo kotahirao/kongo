@@ -2,14 +2,14 @@
 	import type { UsersApi } from '$lib/openapi';
 	import Button, { Label } from '@smui/button';
 	import Dialog, { Title, Content, Actions } from '@smui/dialog';
-	import Textfield from '@smui/textfield';
 	import { createEventDispatcher } from 'svelte';
+	import KongoTextField from './inputs/KongoTextField.svelte';
 
 	export let usersApi: UsersApi;
 
 	const dispatch = createEventDispatcher();
 
-	let open = false;
+	let isOpen = false;
 	let newUserName = '';
 
 	async function createNewUser() {
@@ -21,26 +21,21 @@
 	}
 	function initInputs() {
 		newUserName = '';
-		open = false;
+		isOpen = false;
 	}
 </script>
 
-<Button on:click={() => (open = true)} variant="raised">
+<Button on:click={() => (isOpen = true)} variant="raised">
 	<Label>新規登録</Label>
 </Button>
 
-<Dialog bind:open>
+<Dialog bind:open={isOpen}>
 	<Title>ユーザー新規登録</Title>
 	<Content>
-		<Textfield
-			style="width: 100%; margin-top: 10px;"
-			variant="outlined"
-			bind:value={newUserName}
-			label="ユーザー名"
-		/>
+		<KongoTextField bind:value={newUserName} label="ユーザー名" />
 	</Content>
 	<Actions>
-		<Button on:click={() => (open = false)} color="secondary" variant="outlined">
+		<Button on:click={() => (isOpen = false)} color="secondary" variant="outlined">
 			<Label>キャンセル</Label>
 		</Button>
 		<Button

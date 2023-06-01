@@ -6,7 +6,7 @@ export default class ApiFactory {
 	});
 	private static usersApi: UsersApi;
 
-	static getusersApi() {
+	static getUsersApi() {
 		if (!this.usersApi) {
 			this.usersApi = new UsersApi(this.configuration);
 		}

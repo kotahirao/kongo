@@ -1,11 +1,13 @@
 <script lang="ts">
 	import ApiFactory from '$lib/ApiFactory';
 	import CreateNewUserDialog from '$lib/components/CreateNewUserDialog.svelte';
+	import IconButton from '@smui/icon-button';
 	import DataTable, { Head, Body, Row, Cell } from '@smui/data-table';
+	import KongoH1Title from '$lib/components/KongoH1Title.svelte';
 
-	const usersApi = ApiFactory.getusersApi();
+	const usersApi = ApiFactory.getUsersApi();
 
-	let usersPromise = findAllUsers();
+	let findAllUsersPromise = findAllUsers();
 	async function findAllUsers() {
 		return await usersApi
 			.findAllUsers()
@@ -15,19 +17,22 @@
 			});
 	}
 	function reloadAllUsers() {
-		usersPromise = findAllUsers();
+		findAllUsersPromise = findAllUsers();
 	}
 </script>
 
+<KongoH1Title title="ユーザー一覧" />
+
 <div id="user-table-area">
-	{#await usersPromise}
+	{#await findAllUsersPromise}
 		<p>loading...</p>
 	{:then users}
 		<DataTable table$aria-label="User table" style="width: 100%">
 			<Head>
 				<Row>
-					<Cell numeric>ID</Cell>
-					<Cell numeric>ユーザー名</Cell>
+					<Cell>ID</Cell>
+					<Cell>ユーザー名</Cell>
+					<Cell>アクション</Cell>
 				</Row>
 			</Head>
 			<Body>
@@ -35,12 +40,18 @@
 					<Row>
 						<Cell>{user.id}</Cell>
 						<Cell>{user.name}</Cell>
+						<Cell>
+							<div style="display: flex; align-items: center;">
+								<a href="/users/{user.id}" style="text-decoration: none;"
+									><IconButton class="material-icons">account_circle</IconButton></a
+								>
+								<IconButton class="material-icons">delete</IconButton>
+							</div>
+						</Cell>
 					</Row>
 				{/each}
 			</Body>
 		</DataTable>
-	{:catch error}
-		<p>{error}</p>
 	{/await}
 </div>
 
