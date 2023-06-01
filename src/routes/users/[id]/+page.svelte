@@ -58,3 +58,11 @@
 		<Label>更新</Label>
 	</Button>
 </div>
+
+<div>
+	<a href="/users">
+		<Button variant="outlined">
+			<Label>戻る</Label>
+		</Button>
+	</a>
+</div>
