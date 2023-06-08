@@ -1,9 +1,10 @@
 <script lang="ts">
 	import ApiFactory from '$lib/ApiFactory';
-	import CreateNewUserDialog from '$lib/components/CreateNewUserDialog.svelte';
 	import IconButton from '@smui/icon-button';
 	import DataTable, { Head, Body, Row, Cell } from '@smui/data-table';
 	import KongoH1Title from '$lib/components/KongoH1Title.svelte';
+	import CreateNewUserDialog from './CreateNewUserDialog.svelte';
+	import DeleteUserDialog from './DeleteUserDialog.svelte';
 
 	const usersApi = ApiFactory.getUsersApi();
 
@@ -45,7 +46,12 @@
 								<a href="/users/{user.id}" style="text-decoration: none;"
 									><IconButton class="material-icons">account_circle</IconButton></a
 								>
-								<IconButton class="material-icons">delete</IconButton>
+								<DeleteUserDialog
+									{usersApi}
+									deleteUserId={user.id}
+									deleteUserName={user.name}
+									on:userDeleted={reloadAllUsers}
+								/>
 							</div>
 						</Cell>
 					</Row>
