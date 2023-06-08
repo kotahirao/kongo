@@ -1,10 +1,13 @@
 <script lang="ts">
+	import { Label } from '@smui/button';
 	import ApiFactory from '$lib/ApiFactory';
 	import IconButton from '@smui/icon-button';
 	import DataTable, { Head, Body, Row, Cell } from '@smui/data-table';
 	import KongoH1Title from '$lib/components/KongoH1Title.svelte';
 	import CreateNewUserDialog from './CreateNewUserDialog.svelte';
 	import DeleteUserDialog from './DeleteUserDialog.svelte';
+	import KongoSuccessSnackbar from '$lib/components/snackbar/KongoSuccessSnackbar.svelte';
+	import type Snackbar from '@smui/snackbar';
 
 	const usersApi = ApiFactory.getUsersApi();
 
@@ -19,6 +22,18 @@
 	}
 	function reloadAllUsers() {
 		findAllUsersPromise = findAllUsers();
+	}
+
+	let snackbarSuccessUserCreate: Snackbar;
+	function userCreated() {
+		snackbarSuccessUserCreate.open();
+		reloadAllUsers();
+	}
+
+	let snackbarSuccessUserDelete: Snackbar;
+	function userDeleted() {
+		snackbarSuccessUserDelete.open();
+		reloadAllUsers();
 	}
 </script>
 
@@ -50,7 +65,7 @@
 									{usersApi}
 									deleteUserId={user.id}
 									deleteUserName={user.name}
-									on:userDeleted={reloadAllUsers}
+									on:userDeleted={userDeleted}
 								/>
 							</div>
 						</Cell>
@@ -62,8 +77,12 @@
 </div>
 
 <div id="createNewUserDialog">
-	<CreateNewUserDialog {usersApi} on:userCreated={reloadAllUsers} />
+	<CreateNewUserDialog {usersApi} on:userCreated={userCreated} />
 </div>
+
+<KongoSuccessSnackbar bind:snackbar={snackbarSuccessUserCreate} label="ユーザー登録成功" />
+
+<KongoSuccessSnackbar bind:snackbar={snackbarSuccessUserDelete} label="ユーザー削除成功" />
 
 <style>
 	div#user-table-area {

@@ -6,6 +6,8 @@
 	import Button, { Label } from '@smui/button';
 	import ApiFactory from '$lib/ApiFactory';
 	import { onMount } from 'svelte';
+	import KongoSuccessSnackbar from '$lib/components/snackbar/KongoSuccessSnackbar.svelte';
+	import type Snackbar from '@smui/snackbar';
 
 	export let data: PageData;
 
@@ -13,6 +15,7 @@
 	let userName: string = '';
 	let modeEdit = false;
 	$: disabled = !modeEdit;
+	let snackbarSuccessUserUpdate: Snackbar;
 
 	onMount(loadUser);
 
@@ -31,6 +34,7 @@
 		await usersApi.updateUser(data.userId, { name: userName }).catch((error) => {
 			throw new Error(error);
 		});
+		snackbarSuccessUserUpdate.open();
 		await loadUser();
 		toggleModeEdit();
 	}
@@ -66,3 +70,5 @@
 		</Button>
 	</a>
 </div>
+
+<KongoSuccessSnackbar bind:snackbar={snackbarSuccessUserUpdate} label="ユーザー更新成功" />
