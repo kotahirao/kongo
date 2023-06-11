@@ -10,10 +10,11 @@
 	import type Snackbar from '@smui/snackbar';
 	import type { User } from '$lib/openapi';
 	import Select, { Option } from '@smui/select';
+	import { onMount } from 'svelte';
 
 	const usersApi = ApiFactory.getUsersApi();
 
-	let findAllUsersPromise = findAllUsers();
+	onMount(findAllUsers);
 	async function findAllUsers() {
 		return await usersApi
 			.findAllUsers()
