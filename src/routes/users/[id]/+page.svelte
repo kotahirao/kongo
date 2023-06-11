@@ -44,6 +44,10 @@
 	}
 </script>
 
+<svelte:head>
+	<title>ユーザー詳細</title>
+</svelte:head>
+
 <KongoH1Title title="ユーザー詳細" />
 
 <div style="text-align: right;">

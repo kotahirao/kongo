@@ -41,13 +41,14 @@
 			on:canceledUseCreate={() => (isOpen = false)}
 		/>
 		<Button
+			id="createUserButton"
 			style="margin-left: auto"
 			on:click={() => {
 				createNewUser();
 			}}
 			variant="raised"
 		>
-			<Label>新規登録</Label>
+			<Label>登録</Label>
 		</Button>
 	</Actions>
 </Dialog>

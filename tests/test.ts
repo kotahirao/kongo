@@ -1,6 +1,9 @@
-import { expect, test } from '@playwright/test';
+import { test, expect } from '@playwright/test';
 
-test('index page has expected h1', async ({ page }) => {
-	await page.goto('/');
-	await expect(page.getByRole('heading', { name: 'Welcome to SvelteKit' })).toBeVisible();
+test('test', async ({ page }) => {
+	await page.goto('http://127.0.0.1:5173/users');
+	await page.getByRole('button', { name: '新規登録' }).click();
+	await page.getByPlaceholder(' ').fill('testuser2');
+	await page.getByRole('button', { name: '新規登録' }).nth(1).click();
+	await page.getByRole('cell', { name: 'testuser2' }).click();
 });

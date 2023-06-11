@@ -32,6 +32,7 @@
 	<Actions>
 		<KongoCancelButton dispatchName="canceledUserDelete" />
 		<Button
+			id="deleteUserButton"
 			style="margin-left: auto"
 			on:click={() => {
 				deleteUser();
