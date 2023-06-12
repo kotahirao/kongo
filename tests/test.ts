@@ -11,8 +11,5 @@ test('test', async ({ page }) => {
 	await page.getByPlaceholder(' ').click();
 	await page.getByPlaceholder(' ').fill(createUserName);
 	await page.getByRole('button', { name: '登録', exact: true }).click();
-	await page.getByRole('button', { name: 'last_page' }).click();
 	await page.getByRole('cell', { name: createUserName, exact: true }).isVisible;
-
-	await page.screenshot({ path: 'example.png' });
 });

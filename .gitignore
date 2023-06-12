@@ -13,3 +13,8 @@ vite.config.ts.timestamp-*
 src/lib/openapi/*
 !src/lib/openapi/api.ts
 !src/lib/openapi/configration.ts
+
+# playwright
+/allure-report
+/allure-results
+/playwright-report

@@ -2184,6 +2184,26 @@ ajv@^6.10.0, ajv@^6.12.4:
     json-schema-traverse "^0.4.1"
     uri-js "^4.2.2"
 
+allure-commandline@^2.22.1:
+  version "2.22.1"
+  resolved "https://registry.yarnpkg.com/allure-commandline/-/allure-commandline-2.22.1.tgz#f9214f4b75ead058bb6d083f6a09bde2985f993a"
+  integrity sha512-67j/yyHJTplGWIzMJAlyRboI8H/pxCuvwWRLK5tfSpin2JSJ2itwMxTqlv4/0xp/AhuXSA3yf5/GNslgnuTEJQ==
+
+allure-js-commons@2.4.0:
+  version "2.4.0"
+  resolved "https://registry.yarnpkg.com/allure-js-commons/-/allure-js-commons-2.4.0.tgz#1f75ff0ac153e30aaf4a4eb835fc6e55ee6610c6"
+  integrity sha512-mIQKAA91ihtMPzHJh7fQib/8MhZaUQ0oYtqFzS//5/Q+ILbMWW3WD2ISWtwniFAF2XWdRFjZ013IfUuKusbh1g==
+  dependencies:
+    properties "^1.2.1"
+    uuid "^8.3.0"
+
+allure-playwright@^2.4.0:
+  version "2.4.0"
+  resolved "https://registry.yarnpkg.com/allure-playwright/-/allure-playwright-2.4.0.tgz#8b8ce4ac27290dbc87120029d12aefc8b1477b75"
+  integrity sha512-YtOdQXKPUFFfXVEPUaH5ebNf/2tLmJ1q898l+TPCPBeTQWVpKxLJm5yQkBbu+cmbsN+FGCsfDHFiqcS/r6f71w==
+  dependencies:
+    allure-js-commons "2.4.0"
+
 ansi-escapes@^4.2.1:
   version "4.3.2"
   resolved "https://registry.yarnpkg.com/ansi-escapes/-/ansi-escapes-4.3.2.tgz#6b2291d1db7d98b6521d5f1efa42d0f3a9feb65e"
@@ -3456,6 +3476,11 @@ prettier@^2.8.0:
   resolved "https://registry.yarnpkg.com/prettier/-/prettier-2.8.8.tgz#e8c5d7e98a4305ffe3de2e1fc4aca1a71c28b1da"
   integrity sha512-tdN8qQGvNjw4CHbY+XXk0JgCXn9QiF21a55rBe5LJAU+kDyC4WQn4+awm2Xfk2lQMk5fKup9XgzTZtGkjBdP9Q==
 
+properties@^1.2.1:
+  version "1.2.1"
+  resolved "https://registry.yarnpkg.com/properties/-/properties-1.2.1.tgz#0ee97a7fc020b1a2a55b8659eda4aa8d869094bd"
+  integrity sha512-qYNxyMj1JeW54i/EWEFsM1cVwxJbtgPp8+0Wg9XjNaK6VE/c4oRi6PNu5p7w1mNXEIQIjV5Wwn8v8Gz82/QzdQ==
+
 punycode@^2.1.0:
   version "2.3.0"
   resolved "https://registry.yarnpkg.com/punycode/-/punycode-2.3.0.tgz#f67fa67c94da8f4d0cfff981aee4118064199b8f"
@@ -3997,6 +4022,11 @@ util-deprecate@^1.0.1:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/util-deprecate/-/util-deprecate-1.0.2.tgz#450d4dc9fa70de732762fbd2d4a28981419a0ccf"
   integrity sha512-EPD5q1uXyFxJpCrLnCc1nHnq3gOa6DZBocAIiI2TaSCA7VCJ1UJDMagCzIkXNsUYfD1daK//LTEQ8xiIbrHtcw==
+
+uuid@^8.3.0:
+  version "8.3.2"
+  resolved "https://registry.yarnpkg.com/uuid/-/uuid-8.3.2.tgz#80d5b5ced271bb9af6c445f21a1a04c606cefbe2"
+  integrity sha512-+NYs2QeMWy+GWFOEm9xnn6HCDp0l7QBD7ml8zLUmJ+93Q5NF0NocErnwkTkXVFNiX3/fpC6afS8Dhb/gz7R7eg==
 
 "vite@^3.0.0 || ^4.0.0", vite@^4.3.0:
   version "4.3.9"
