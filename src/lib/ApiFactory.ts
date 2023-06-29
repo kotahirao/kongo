@@ -2,7 +2,7 @@ import { Configuration, UsersApi } from './openapi';
 
 export default class ApiFactory {
 	private static configuration: Configuration = new Configuration({
-		basePath: 'http://localhost:8080'
+		basePath: 'http://localhost:8081'
 	});
 	private static usersApi: UsersApi;
 
