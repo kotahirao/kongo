@@ -2369,6 +2369,11 @@ check-error@^1.0.2:
   optionalDependencies:
     fsevents "~2.3.2"
 
+ci@^2.2.0:
+  version "2.2.0"
+  resolved "https://registry.yarnpkg.com/ci/-/ci-2.2.0.tgz#778b9250c96f1155e3b25de59e71aa4aa383cebc"
+  integrity sha512-lBkEN6XclyW0jnprtFQ+dsbP+9zwmo37Z1cV38h4FSDgI2QzFqwknJnVSvRxK9UXkPC4ZcVOVFyCVrNylTX52Q==
+
 cli-cursor@^3.1.0:
   version "3.1.0"
   resolved "https://registry.yarnpkg.com/cli-cursor/-/cli-cursor-3.1.0.tgz#264305a7ae490d1d03bf0c9ba7c925d1753af307"
