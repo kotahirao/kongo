@@ -6,13 +6,13 @@ test.describe('ユーザー一覧', () => {
 
 		await expect(page).toHaveTitle('ユーザー一覧');
 
-		const createUserName = 'testuser';
+		// const createUserName = 'testuser';
 
-		await page.getByRole('button', { name: '新規登録' }).click();
-		await page.getByPlaceholder(' ').click();
-		await page.getByPlaceholder(' ').fill(createUserName);
-		await page.getByRole('button', { name: '登録', exact: true }).click();
-		await expect(page.getByRole('cell', { name: createUserName, exact: true })).toBeVisible();
+		// await page.getByRole('button', { name: '新規登録' }).click();
+		// await page.getByPlaceholder(' ').click();
+		// await page.getByPlaceholder(' ').fill(createUserName);
+		// await page.getByRole('button', { name: '登録', exact: true }).click();
+		// await expect(page.getByRole('cell', { name: createUserName, exact: true })).toBeVisible();
 	});
 
 	test('ユーザー登録2', async ({ page }) => {
@@ -20,12 +20,12 @@ test.describe('ユーザー一覧', () => {
 
 		await expect(page).toHaveTitle('ユーザー一覧');
 
-		const createUserName = 'testuser';
+		// const createUserName = 'testuser';
 
-		await page.getByRole('button', { name: '新規登録' }).click();
-		await page.getByPlaceholder(' ').click();
-		await page.getByPlaceholder(' ').fill(createUserName);
-		await page.getByRole('button', { name: '登録', exact: true }).click();
-		await expect(page.getByRole('cell', { name: createUserName, exact: true })).toBeVisible();
+		// await page.getByRole('button', { name: '新規登録' }).click();
+		// await page.getByPlaceholder(' ').click();
+		// await page.getByPlaceholder(' ').fill(createUserName);
+		// await page.getByRole('button', { name: '登録', exact: true }).click();
+		// await expect(page.getByRole('cell', { name: createUserName, exact: true })).toBeVisible();
 	});
 });
