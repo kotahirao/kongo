@@ -5,7 +5,8 @@ on:
   pull_request:
     branches: [develop, master]
 jobs:
-  test:
+  tests_e2e:
+    name: Run e2e tests
     timeout-minutes: 60
     runs-on: ubuntu-latest
     steps:
