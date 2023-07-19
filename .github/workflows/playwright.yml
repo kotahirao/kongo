@@ -18,8 +18,6 @@ jobs:
         run: yarn install --immutable --immutable-cache --check-cache
       - name: Install Playwright Browsers
         run: yarn playwright install --with-deps
-      - name: Run webapp
-        run: yarn dev
       - name: Run Playwright tests
         run: yarn run-e2e
       - uses: actions/upload-artifact@v3
