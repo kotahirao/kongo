@@ -1,4 +1,7 @@
-<script lang="ts">
+<svelte:head>
+	<title>ユーザー一覧</title>
+</svelte:head>
+<!-- <script lang="ts">
 	import { Label } from '@smui/button';
 	import ApiFactory from '$lib/ApiFactory';
 	import IconButton from '@smui/icon-button';
@@ -150,3 +153,4 @@
 		float: right;
 	}
 </style>
+ -->
