@@ -17,7 +17,8 @@
 		"generate-schemas": "openapi-generator-cli generate -g typescript-axios -i ./openapi/nile-openapi.yaml -o ./src/lib/openapi",
 		"update-nile": "cp ../nile/openapi/nile-openapi.yaml ./openapi/nile-openapi.yaml",
 		"update-openapi": "yarn update-nile && yarn generate-schemas && yarn format",
-		"run-e2e": "rm -f ./allure-results/* && yarn playwright test --reporter=html,allure-playwright && yarn allure generate ./allure-results --clean && yarn allure open ./allure-report"
+		"run-local-e2e": "rm -f ./allure-results/* && yarn playwright test --reporter=html,allure-playwright && yarn allure generate ./allure-results --clean && yarn allure open ./allure-report",
+		"run-ci-e2e": "yarn playwright test --reporter=html,allure-playwright && yarn allure generate ./allure-results --cleanß"
 	},
 	"devDependencies": {
 		"@openapitools/openapi-generator-cli": "^2.6.0",
